@@ -250,6 +250,9 @@ protected:
     void clearSub(Node<Key, Value>* curr);
     int getHeight(Node<Key, Value>* curr) const;
     bool balancedHelper(Node<Key, Value>* curr) const;
+    Node<Key, Value>* getRoot() const;
+    void setRoot(Node<Key, Value>* newRoot);
+    
 
 protected:
     Node<Key, Value>* root_;
@@ -594,7 +597,9 @@ BinarySearchTree<Key, Value>::predecessor(Node<Key, Value>* current)
     
     if(current->getLeft() != NULL){
         pre = current->getLeft();
+        //std::cout << "HELLOOOOOOOO" <<std::endl;
         while(pre->getRight() != NULL){
+          //std::cout << "BYEEEEEEEEEEEEEEEEE" <<std::endl;
             pre = pre->getRight();
         }
     }
@@ -724,6 +729,15 @@ bool BinarySearchTree<Key, Value>::balancedHelper(Node<Key, Value>* curr) const{
     return balancedHelper(curr->getLeft()) && balancedHelper(curr->getRight());
 }
 
+template<typename Key, typename Value>
+Node<Key, Value>* BinarySearchTree<Key, Value>::getRoot() const{
+  return root_;
+}
+
+template<typename Key, typename Value>
+void BinarySearchTree<Key, Value>::setRoot(Node<Key, Value>* newRoot){
+  root_ = newRoot;
+}
 
 template<typename Key, typename Value>
 void BinarySearchTree<Key, Value>::nodeSwap( Node<Key,Value>* n1, Node<Key,Value>* n2)
